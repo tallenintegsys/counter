@@ -1,5 +1,4 @@
 *.swp
-*.qsf
 *.bak
 a.out
 incremental_db/
