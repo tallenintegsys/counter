@@ -1,34 +1,20 @@
 module counter (
-	CLOCK_50,
-	SW,		//input from switch
-	KEY,
-	LEDG,		//output to green LEDs
-	LEDR,
-	GPIO,		//output to GPIO port
-	HEX0,
-	HEX1,
-	HEX2,
-	HEX3,
-	HEX4,
-	HEX5);
-
-input CLOCK_50;
-input [17:0] SW;
-input [0:0] KEY;
-output [8:0] LEDG;
-output [17:0] LEDR;
-output [35:0] GPIO;
-output [6:0] HEX0;
-output [6:0] HEX1;
-output [6:0] HEX2;
-output [6:0] HEX3;
-output [6:0] HEX4;
-output [6:0] HEX5;
+	input CLOCK_50,
+	input [17:0] SW,
+	input [0:0] KEY,
+	output [8:0] LEDG,
+	output [17:0] LEDR,
+	output [35:0] GPIO,
+	output [6:0] HEX0,
+	output [6:0] HEX1,
+	output [6:0] HEX2,
+	output [6:0] HEX3,
+	output [6:0] HEX4,
+	output [6:0] HEX5);
 
 reg [31:0] count;
 wire reset;
 reg [3:0] bcd;
-reg [17:0] LEDR;
 wire [6:0] seg;
 wire [6:0] bigseg0;
 wire [6:0] bigseg1;

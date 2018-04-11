@@ -1,5 +1,6 @@
 *.swp
 *.qsf
+*.bak
 a.out
 incremental_db/
 output_files/
