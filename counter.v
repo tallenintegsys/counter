@@ -8,9 +8,7 @@ module counter (
 	output [6:0] HEX0,
 	output [6:0] HEX1,
 	output [6:0] HEX2,
-	output [6:0] HEX3,
-	output [6:0] HEX4,
-	output [6:0] HEX5);
+	output [6:0] HEX3);
 
 reg [31:0] count;
 wire reset;
@@ -47,14 +45,15 @@ assign HEX3[6:0] = seg3;
 assign reset = KEY[0];
 assign GPIO[6:0] = bigseg;
 assign GPIO[9:8] = sel;
+assign LEDR[17:0] = count[31:14];
 
 always @ (posedge CLOCK_50)
 if (~reset) begin
 	count <= 0;
 	bcd[3:0] <= 4'b0000;
 end else begin
-	count <= count - 1;
-	if (count[20]) begin
+	count <= count + 1;
+	if (count[17]) begin
 		sel <= 2'b01;
 		bigseg <= ~seg3;
 	end else begin
