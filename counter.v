@@ -12,28 +12,27 @@ module counter (
 
 reg [31:0] count;
 wire reset;
-reg [3:0] bcd;
 reg [6:0] bigseg;
 wire [6:0] seg0;
 wire [6:0] seg1;
 wire [6:0] seg2;
 wire [6:0] seg3;
-reg [1:0] sel;
+reg	 [1:0] sel;
 
 bcdto7seg hex0 (
-	.bcd(count[19:16]), 
+	.bcd(count[19:16]),
 	.seg(seg0)
 );
 bcdto7seg hex1 (
-	.bcd(count[23:20]), 
+	.bcd(count[23:20]),
 	.seg(seg1)
 );
 bcdto7seg hex2 (
-	.bcd(count[27:24]), 
+	.bcd(count[27:24]),
 	.seg(seg2)
 );
 bcdto7seg hex3 (
-	.bcd(count[31:28]), 
+	.bcd(count[31:28]),
 	.seg(seg3)
 );
 
@@ -48,9 +47,8 @@ assign GPIO[9:8] = sel;
 assign LEDR[17:0] = count[31:14];
 
 always @ (posedge CLOCK_50)
-if (~reset) begin
+if (!reset) begin
 	count <= 0;
-	bcd[3:0] <= 4'b0000;
 end else begin
 	count <= count + 1;
 	if (count[17]) begin
