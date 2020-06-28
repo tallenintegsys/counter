@@ -42,22 +42,24 @@ assign HEX1[6:0] = seg1;
 assign HEX2[6:0] = seg2;
 assign HEX3[6:0] = seg3;
 assign reset = KEY[0];
+assign inhibit = SW[17];
 assign GPIO[6:0] = bigseg;
 assign GPIO[9:8] = sel;
 assign LEDR[17:0] = count[31:14];
 
 always @ (posedge CLOCK_50)
-if (!reset) begin
-	count <= 0;
-end else begin
-	count <= count + 1;
-	if (count[17]) begin
-		sel <= 2'b01;
-		bigseg <= ~seg3;
-	end else begin
-		sel <= 2'b10;
-		bigseg <= ~seg2;
+	if (!reset) begin
+		count <= 0;
+	end 
+	else if (!inhibit) begin
+		count <= count + 1;
+		if (count[17]) begin
+			sel <= 2'b01;
+			bigseg <= ~seg3;
+		end else begin
+			sel <= 2'b10;
+			bigseg <= ~seg2;
+		end
 	end
-end
 endmodule
 
